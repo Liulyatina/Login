@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
     private final IUserService userService=ServiceFactory.getUserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         // Получаем данные из POST-запроса
