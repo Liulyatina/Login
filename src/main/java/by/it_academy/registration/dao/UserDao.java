@@ -1,33 +1,29 @@
 package by.it_academy.registration.dao;
 
-import by.it_academy.registration.controller.User;
+import by.it_academy.registration.dao.dto.UserDto;
 import by.it_academy.registration.dao.api.IUserDao;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserDao implements IUserDao {
-    private Map<String, User> userMap;
-
-    public UserDao() {
-        userMap = new HashMap<>(); // Инициализация хранилища данных
-    }
+    private final Map<String, UserDto> userMap = new HashMap<>();
 
     @Override
-    public void addUser(User user) {
-        userMap.put(user.getLogin(), user);
-    }
-
-    @Override
-    public User getUserByLogin(String login) {
-        System.out.println("Попытка извлечения пользователя с логином: " + login);
-        User user = userMap.get(login);
-        if (user != null) {
-            System.out.println("Пользователь найден: " + user);
-        } else {
-            System.out.println("Пользователь с логином " + login + " не найден");
+    public boolean addUser(String login, String password, String fullName, LocalDate birthDate) {
+        if (userMap.containsKey(login)) {
+            return false; // Пользователь с таким логином уже существует
         }
-        return user;
+
+        UserDto user = new UserDto(login, password, fullName, birthDate, LocalDate.now(), "пользователь");
+        userMap.put(login, user);
+        return true;
     }
 
+    @Override
+    public boolean getUserByLogin(String login, String password) {
+        UserDto user = userMap.get(login);
+        return user != null && user.getPassword().equals(password);
+    }
 }

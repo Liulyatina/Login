@@ -1,24 +1,21 @@
 package by.it_academy.registration.service;
 
-import by.it_academy.registration.controller.User;
 import by.it_academy.registration.dao.UserDao;
+import by.it_academy.registration.dao.dto.UserDto;
+import by.it_academy.registration.dao.api.IUserDao;
 import by.it_academy.registration.dao.factory.DaoFactory;
 import by.it_academy.registration.service.api.IUserService;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 public class UserService implements IUserService {
-    private final Map<String, User> userMap = new HashMap<>();
-
-    private final UserDao userDao = DaoFactory.getUserDao();
+    private final IUserDao userDao = DaoFactory.getUserDao();
 
     public UserService(UserDao userDao) {
     }
 
     @Override
-    public User registerUser(String login, String password, String fullName, LocalDate birthDate) {
+    public UserDto save(String login, String password, String fullName, LocalDate birthDate) {
 
         if (login == null || login.isEmpty()) {
             throw new IllegalArgumentException("Login cannot be empty");
@@ -39,38 +36,13 @@ public class UserService implements IUserService {
             throw new IllegalArgumentException("Invalid birth date. User must be at least 18 years old");
         }
 
-        // Проверяем, что пользователь с таким логином еще не зарегистрирован
-        if (userDao.getUserByLogin(login) != null) {
-            throw new IllegalArgumentException("User with this login already exists");
-        }
-
-        User user = new User(login, password, fullName, birthDate, LocalDate.now(), "пользователь");
-        userDao.addUser(user);
+        UserDto user = new UserDto(login);
+        userDao.addUser(login, password, fullName, birthDate);
         return user;
     }
 
     @Override
-    public boolean loginUser(String login, String password) {
-        // Получаем пользователя по логину
-        User user = userDao.getUserByLogin(login);
-
-        // Проверяем, найден ли пользователь
-        if (user == null) {
-            // Пользователь с указанным логином не найден
-            return false;
-        }
-
-        // Проверяем совпадение паролей
-        return user.getPassword().equals(password);
+    public boolean getUserByLogin(String login, String password) {
+        return userDao.getUserByLogin(login, password);
     }
-
-    public void addUser(User user) {
-        userMap.put(user.getLogin(), user);
-    }
-
-    public User getUserByLogin(String login) {
-        return userDao.getUserByLogin(login);
-    }
-
 }
-

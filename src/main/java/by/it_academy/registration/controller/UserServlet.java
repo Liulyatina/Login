@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import by.it_academy.registration.dao.dto.UserDto;
 import by.it_academy.registration.service.UserService;
 import by.it_academy.registration.service.factory.ServiceFactory;
 import jakarta.servlet.ServletException;
@@ -18,24 +19,7 @@ import jakarta.servlet.http.HttpSession;
 public class UserServlet extends HttpServlet {
 
     // Коллекция для хранения пользователей (вместо базы данных)
-    private final Map<String, User> userMap = new HashMap<>();
-
-    @Override
-    public void init() throws ServletException {
-        // При инициализации создаем пользователя-администратора
-        String adminLogin = "admin";
-        String adminPassword = "admin123";
-        String adminFullName = "Admin Adminov";
-        LocalDate adminBirthDate = LocalDate.of(1990, 1, 1);
-        String adminRole = "администратор";
-
-        User adminUser = new User(adminLogin, adminPassword, adminFullName, adminBirthDate, LocalDate.now(), adminRole);
-
-        UserService userService = ServiceFactory.getUserService();
-
-        // Добавляем пользователя-администратора
-        userService.addUser(adminUser);
-    }
+    private final Map<String, UserDto> userMap = new HashMap<>();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -58,7 +42,7 @@ public class UserServlet extends HttpServlet {
 
         try {
             // Регистрируем пользователя
-            User user = userService.registerUser(login, password, fullName, birthDate);
+            UserDto user = userService.save(login, password, fullName, birthDate);
 
             // Если регистрация прошла успешно, сохраняем информацию о пользователе в сессии
             HttpSession session = request.getSession();

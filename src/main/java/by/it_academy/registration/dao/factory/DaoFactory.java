@@ -1,9 +1,10 @@
 package by.it_academy.registration.dao.factory;
 
 import by.it_academy.registration.dao.UserDao;
+import by.it_academy.registration.dao.api.IUserDao;
 
 public class DaoFactory {
-    private static volatile UserDao userDao;
+    private static volatile IUserDao userDao;
 
     private DaoFactory() {}
 
@@ -15,6 +16,6 @@ public class DaoFactory {
                 }
             }
         }
-        return userDao;
+        return (UserDao) userDao;
     }
 }

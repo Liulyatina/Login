@@ -1,9 +1,11 @@
 package by.it_academy.registration.dao.api;
 
-import by.it_academy.registration.controller.User;
+import by.it_academy.registration.dao.dto.UserDto;
+
+import java.time.LocalDate;
 
 public interface IUserDao {
-    void addUser(User user);
+    boolean addUser(String login, String password, String fullName, LocalDate birthDate);
 
-    User getUserByLogin(String login);
+    boolean getUserByLogin(String login, String password);
 }
