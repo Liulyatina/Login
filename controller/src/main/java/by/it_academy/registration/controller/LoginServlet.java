@@ -14,16 +14,18 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/api/login")
 public class LoginServlet extends HttpServlet {
+    private final static String LOGIN_PARAM_NAME="login";
+    private final static String PASSWORD_PARAM_NAME="password";
+
+    private final IUserService userService=ServiceFactory.getUserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         // Получаем данные из POST-запроса
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        String login = request.getParameter(LOGIN_PARAM_NAME);
 
-        // Получаем экземпляр UserService из фабрики
-        IUserService userService = ServiceFactory.getUserService();
+        String password = request.getParameter(PASSWORD_PARAM_NAME);
 
         // Проверяем, существует ли пользователь с таким логином и паролем
         boolean userExists = userService.getUserByLogin(login, password);

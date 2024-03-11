@@ -7,6 +7,7 @@ import java.util.Map;
 
 import by.it_academy.registration.dao.dto.UserDto;
 import by.it_academy.registration.service.UserService;
+import by.it_academy.registration.service.api.IUserService;
 import by.it_academy.registration.service.factory.ServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,6 +19,13 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/api/user")
 public class UserServlet extends HttpServlet {
 
+    private final static String LOGIN_PARAM_NAME="login";
+    private final static String PASSWORD_PARAM_NAME="password";
+    private final static String NAMES_PARAM_NAME="fullName";
+    private final static String BIRTH_PARAM_NAME="birthDate";
+
+    private final IUserService userService=ServiceFactory.getUserService();
+
     // Коллекция для хранения пользователей (вместо базы данных)
     private final Map<String, UserDto> userMap = new HashMap<>();
 
@@ -25,20 +33,17 @@ public class UserServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         // Получаем данные из POST-запроса
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String fullName = request.getParameter("fullName");
+        String login = request.getParameter(LOGIN_PARAM_NAME);
+        String password = request.getParameter(PASSWORD_PARAM_NAME);
+        String fullName = request.getParameter(NAMES_PARAM_NAME);
         LocalDate birthDate = null;
 
         try {
-            birthDate = LocalDate.parse(request.getParameter("birthDate"));
+            birthDate = LocalDate.parse(request.getParameter(BIRTH_PARAM_NAME));
         } catch (Exception e) {
             response.getWriter().write("Ошибка: Неверный формат даты рождения");
             return;
         }
-
-        // Получаем экземпляр UserService из ServiceFactory
-        UserService userService = ServiceFactory.getUserService();
 
         try {
             // Регистрируем пользователя
