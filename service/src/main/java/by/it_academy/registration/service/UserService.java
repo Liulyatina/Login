@@ -31,11 +31,6 @@ public class UserService implements IUserService {
             throw new IllegalArgumentException("Full name cannot be empty");
         }
 
-        // Проверяем, что дата рождения не пустая и что пользователь достиг совершеннолетия
-        if (birthDate == null || birthDate.isAfter(LocalDate.now().minusYears(18))) {
-            throw new IllegalArgumentException("Invalid birth date. User must be at least 18 years old");
-        }
-
         UserDto user = new UserDto(login);
         userDao.addUser(login, password, fullName, birthDate);
         return user;
