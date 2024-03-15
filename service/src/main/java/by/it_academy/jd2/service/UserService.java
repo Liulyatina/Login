@@ -19,13 +19,10 @@ public class UserService implements IUserService {
 
     @Override
     public void create(UserDTO userDTO) {
-        if(userDTO.getRole() != null){
-            throw new IllegalArgumentException("Роль должна быть обязательно указана");
-        }
-        if(userDTO.getLogin() != null){
+        if(userDTO.getLogin() == null || userDTO.getLogin().isEmpty()) {
             throw new IllegalArgumentException("Логин должен быть обязательно указан");
         }
-        if(userDTO.getPassword() != null){
+        if(userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
             throw new IllegalArgumentException("Пароль должен быть обязательно указан");
         }
 
@@ -45,7 +42,7 @@ public class UserService implements IUserService {
         UserDTO user = new UserDTO();
         user.setLogin(registrationUserDTO.getLogin());
         user.setPassword(registrationUserDTO.getPassword());
-        user.setRole(UserRole.USER);
+        user.setRole(registrationUserDTO.getRole());
         user.setName(registrationUserDTO.getName());
         user.setBirthday(registrationUserDTO.getBirthday());
 

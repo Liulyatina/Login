@@ -1,5 +1,7 @@
 package by.it_academy.jd2.service.dto;
 
+import by.it_academy.jd2.core.dto.UserRole;
+
 import java.time.LocalDate;
 
 public class RegistrationUserDTO {
@@ -7,15 +9,17 @@ public class RegistrationUserDTO {
     private String password;
     private String name;
     private LocalDate birthday;
+    private UserRole role;
 
     public RegistrationUserDTO() {
     }
 
-    public RegistrationUserDTO(String login, String password, String name, LocalDate birthday) {
+    public RegistrationUserDTO(String login, String password, String name, LocalDate birthday, UserRole role) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.birthday = birthday;
+        this.role = role;
     }
 
     public String getLogin() {
@@ -49,4 +53,14 @@ public class RegistrationUserDTO {
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
 }
+
