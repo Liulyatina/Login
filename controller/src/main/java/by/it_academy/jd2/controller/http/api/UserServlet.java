@@ -1,4 +1,4 @@
-package by.it_academy.jd2.controller.http;
+package by.it_academy.jd2.controller.http.api;
 
 import by.it_academy.jd2.core.dto.UserRole;
 import by.it_academy.jd2.service.api.IUserService;
@@ -23,7 +23,6 @@ public class UserServlet extends HttpServlet {
     public static final String PASSWORD_PARAMETER_NAME = "password";
     public static final String NAME_PARAMETER_NAME = "name";
     public static final String BIRTHDAY_PARAMETER_NAME = "birthday";
-    public static final String ROLE = "role";
 
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -34,12 +33,9 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter(LOGIN_PARAMETER_NAME);
         String password = req.getParameter(PASSWORD_PARAMETER_NAME);
-
-        String roleString = req.getParameter(ROLE);
-        UserRole role = UserRole.valueOf(roleString);
-
         String name = req.getParameter(NAME_PARAMETER_NAME);
         String birthdayRaw = req.getParameter(BIRTHDAY_PARAMETER_NAME);
+
         LocalDate birthday;
 
         PrintWriter writer = resp.getWriter();
@@ -52,7 +48,7 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
-        RegistrationUserDTO user = new RegistrationUserDTO(login, password, name, birthday, role);
+        RegistrationUserDTO user = new RegistrationUserDTO(login, password, name, birthday);
 
         try {
             this.userService.create(user);
@@ -60,7 +56,6 @@ public class UserServlet extends HttpServlet {
         } catch (IllegalArgumentException e) {
             writer.write("Ошибка валидации: " + e.getMessage());
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
         }
     }
 }

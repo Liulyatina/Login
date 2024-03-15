@@ -1,5 +1,6 @@
-package by.it_academy.jd2.controller.http;
+package by.it_academy.jd2.controller.http.api;
 
+import by.it_academy.jd2.controller.utils.SessionUtils;
 import by.it_academy.jd2.core.dto.UserDTO;
 import by.it_academy.jd2.service.api.IAuthService;
 import by.it_academy.jd2.service.dto.LoginDTO;
@@ -34,16 +35,10 @@ public class LoginServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
 
-        try{
-            UserDTO userDTO = this.authService.login(dto);
+        UserDTO userDTO = this.authService.login(dto);
 
-            HttpSession session = req.getSession();
+        HttpSession session = req.getSession();
 
-            session.setAttribute("user", userDTO);
-        } catch (IllegalArgumentException e){
-            writer.write(e.getMessage());
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
+        SessionUtils.saveUser(session, userDTO);
     }
 }

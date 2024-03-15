@@ -1,11 +1,13 @@
 package by.it_academy.jd2.service.api;
 
-import by.it_academy.jd2.service.dto.MessageDTO;
+import by.it_academy.jd2.core.dto.MessageDTO;
+import by.it_academy.jd2.core.dto.UserDTO;
+import by.it_academy.jd2.service.dto.SendMessageDTO;
 
 import java.util.List;
 
 public interface IMessageService {
-    List<MessageDTO> getMessageForUser(String login);
+    List<MessageDTO> list(UserDTO toUser);
 
-    void sendMessage(MessageDTO message);
+    void create(UserDTO from, SendMessageDTO dto);
 }
