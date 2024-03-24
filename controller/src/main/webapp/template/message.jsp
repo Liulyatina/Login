@@ -8,8 +8,12 @@
 </head>
 <body>
 <form action="${basePath}/api/message" method="POST">
-    <input name="to" type="text"/>
-    <input name="text" type="text"/>
+    <label for="to">Кому</label>
+    <input type="text" id="to" name="to"/>
+
+    <label for="text">Сообщение</label>
+    <input type="text" id="text" name="text"/>
+
     <input type="submit"/>
 </form>
 </body>

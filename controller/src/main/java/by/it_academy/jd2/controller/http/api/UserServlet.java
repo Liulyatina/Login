@@ -23,8 +23,7 @@ public class UserServlet extends HttpServlet {
     public static final String PASSWORD_PARAMETER_NAME = "password";
     public static final String NAME_PARAMETER_NAME = "name";
     public static final String BIRTHDAY_PARAMETER_NAME = "birthday";
-
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public final IUserService userService = ServiceFactory.getUserService();
 
@@ -42,10 +41,8 @@ public class UserServlet extends HttpServlet {
 
         try {
             birthday = LocalDate.parse(birthdayRaw, formatter);
-        } catch (DateTimeParseException e) {
-            writer.write("Ошибка в переданной дате. Передавайте в формате dd-MM-yyyy");
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+        } catch (DateTimeParseException e){
+            throw new IllegalArgumentException("Ошибка при чтении даты. Введите дату в формате дд.мм.уууу");
         }
 
         RegistrationUserDTO user = new RegistrationUserDTO(login, password, name, birthday);

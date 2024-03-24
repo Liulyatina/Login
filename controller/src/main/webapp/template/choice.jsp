@@ -4,12 +4,24 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Сообщения</title>
+    <title>Главная страница</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/ui/signUp">Регистрация</a></br>
-<a href="${pageContext.request.contextPath}/ui/signIn">Войти</a></br>
-<a href="${pageContext.request.contextPath}/ui/user/chat">Ваши сообщения</a></br>
-<a href="${pageContext.request.contextPath}/ui/user/message">Отправить сообщение</a></br>
+<h1 align="center">Меню</h1>
+<form action="${pageContext.request.contextPath}/ui/signUp" METHOD="get">
+    <button type="submit">Регистрация</button>
+</form>
+<form action="${pageContext.request.contextPath}/ui/signIn" METHOD="get">
+    <button type="submit">Вход</button>
+</form>
+<form action="${pageContext.request.contextPath}/ui/user/chat" METHOD="get">
+    <button type="submit">Ваши сообщения</button>
+</form>
+<form action="${pageContext.request.contextPath}/ui/admin/statistics" METHOD="get">
+    <button type="submit">Статистика</button>
+</form>
+<form action="${pageContext.request.contextPath}/ui/user/message" METHOD="get">
+    <button type="submit">Отправить сообщение</button>
+</form>
 </body>
 </html>

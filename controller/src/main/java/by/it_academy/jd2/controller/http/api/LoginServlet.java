@@ -41,6 +41,6 @@ public class LoginServlet extends HttpServlet {
 
         SessionUtils.saveUser(session, userDTO);
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        writer.write("Вход выполнен успешно");
     }
 }

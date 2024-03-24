@@ -1,15 +1,19 @@
 package by.it_academy.jd2.controller.http.api;
 
+import by.it_academy.jd2.controller.listener.UserSessionListener;
 import by.it_academy.jd2.controller.utils.SessionUtils;
 import by.it_academy.jd2.core.dto.MessageDTO;
+import by.it_academy.jd2.service.StatService;
 import by.it_academy.jd2.service.api.IMessageService;
 import by.it_academy.jd2.service.dto.SendMessageDTO;
 import by.it_academy.jd2.service.factory.ServiceFactory;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +35,7 @@ public class MessageServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
 
-        if(messages != null){
+        if (messages != null) {
             for (MessageDTO message : messages) {
                 writer.write("<p>Дата отправки: " + message.getDateTime() + "</p>");
                 writer.write("<p>От кого: " + message.getFrom() + "</p>");
@@ -51,6 +55,7 @@ public class MessageServlet extends HttpServlet {
                 .build();
 
         this.messageService.create(SessionUtils.loadUser(req.getSession()), dto);
+
         resp.setStatus(HttpServletResponse.SC_CREATED);
     }
 }

@@ -8,9 +8,14 @@
 </head>
 <body>
 <form action="${basePath}/api/login" method="POST">
-    <input name="login" type="text"/>
-    <input name="password" type="password"/>
-    <input type="submit"/>
+<label for="login">Логин:</label>
+<input type="text" id="login" name="login"><br>
+
+<label for="password">Пароль:</label>
+<input type="password" id="password" name="password"/><br>
+
+
+<input type="submit" value="Войти"/>
 </form>
 </body>
 </html>
