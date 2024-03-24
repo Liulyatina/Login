@@ -12,13 +12,13 @@ import jakarta.servlet.http.HttpSessionListener;
 @WebListener
 public class UserSessionListener implements HttpSessionListener {
 
-    private final IStatService statisticsService = ServiceFactory.getStatService();
+    private final IStatService statService = ServiceFactory.getStatService();
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session=se.getSession();
         if (SessionUtils.loadUser(session)!=null){
-            statisticsService.incrementActiveUser();
+            statService.incrementActiveUser();
         }
     }
 
@@ -26,7 +26,7 @@ public class UserSessionListener implements HttpSessionListener {
     public void sessionDestroyed(HttpSessionEvent se) {
         HttpSession session=se.getSession();
         if (SessionUtils.loadUser(session)!=null) {
-            statisticsService.decrementActiveUser();
+            statService.decrementActiveUser();
         }
     }
 }

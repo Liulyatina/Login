@@ -23,7 +23,7 @@
         <c:otherwise>
             <c:forEach var="message" items="${mess}">
                 <tr>
-                    <td>${message.dtCreate}</td>
+                    <td>${message.dateTime}</td>
                     <td>${message.from}</td>
                     <td>${message.text}</td>
                 </tr>

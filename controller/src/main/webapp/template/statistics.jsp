@@ -22,7 +22,7 @@
         <table border="2" align="centre">
             <tr>
                 <td>Количество активных пользователей</td>
-                <td>${statistics.activeUser}</td>
+                <td>${statistics.activeUsers}</td>
             </tr>
             <tr>
                 <td>Количество пользователей</td>
