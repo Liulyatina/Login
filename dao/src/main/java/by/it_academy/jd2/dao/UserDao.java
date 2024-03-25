@@ -1,7 +1,9 @@
 package by.it_academy.jd2.dao;
 
 import by.it_academy.jd2.core.dto.UserDTO;
+import by.it_academy.jd2.dao.api.IStatDao;
 import by.it_academy.jd2.dao.api.IUserDao;
+import by.it_academy.jd2.dao.factory.DaoFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +11,8 @@ import java.util.Optional;
 
 public class UserDao implements IUserDao {
     private final Map<String, UserDTO> users = new HashMap<>();
+
+    private final IStatDao statDao = DaoFactory.getStatDao();
 
     @Override
     public void create(UserDTO user) {
@@ -19,6 +23,9 @@ public class UserDao implements IUserDao {
             }
             return user;
         });
+
+        statDao.incrementUser();
+
     }
 
     @Override

@@ -23,10 +23,6 @@ public class StatisticsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        HttpSession session = request.getSession();
-
-        UserDTO user = SessionUtils.loadUser(session);
-
         StatDTO statDTO = statService.get();
 
         PrintWriter writer = response.getWriter();

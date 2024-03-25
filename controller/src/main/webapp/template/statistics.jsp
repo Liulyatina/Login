@@ -19,7 +19,7 @@
         <h2>Статистка пуста</h2>
     </c:when>
     <c:otherwise>
-        <table border="2" align="centre">
+        <table border="3" align="centre">
             <tr>
                 <td>Количество активных пользователей</td>
                 <td>${statistics.activeUsers}</td>

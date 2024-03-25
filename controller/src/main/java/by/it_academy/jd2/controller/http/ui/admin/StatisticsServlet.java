@@ -20,9 +20,6 @@ public class StatisticsServlet extends HttpServlet {
     private final IStatService statisticsService = ServiceFactory.getStatService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session=req.getSession();
-
-        UserDTO user = SessionUtils.loadUser(session);
 
         StatDTO statisticsDTO=statisticsService.get();
         req.setAttribute("statistics",statisticsDTO);

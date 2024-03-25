@@ -2,6 +2,7 @@ package by.it_academy.jd2.service;
 
 import by.it_academy.jd2.core.dto.MessageDTO;
 import by.it_academy.jd2.core.dto.UserDTO;
+import by.it_academy.jd2.dao.MessageDao;
 import by.it_academy.jd2.dao.api.IMessageDao;
 import by.it_academy.jd2.service.api.IMessageService;
 import by.it_academy.jd2.service.api.IUserService;
@@ -49,6 +50,5 @@ public class MessageService implements IMessageService {
 
         this.messageDao.create(create);
 
+        }
     }
-
-}
