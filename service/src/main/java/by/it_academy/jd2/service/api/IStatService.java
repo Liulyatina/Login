@@ -5,7 +5,7 @@ import by.it_academy.jd2.service.dto.LoginDTO;
 
 public interface IStatService {
 
-    StatDTO get(LoginDTO loginDTO);
+    StatDTO get();
     void incrementUser();
 
     void decrementUser();

@@ -56,7 +56,7 @@ public class ServiceFactory {
         if (statService == null) {
             synchronized (ServiceFactory.class) {
                 if (statService == null) {
-                    statService = new StatService(DaoFactory.getStatDao(), getUserService());
+                    statService = new StatService(DaoFactory.getStatDao());
                 }
             }
         }

@@ -22,10 +22,9 @@ public class StatisticsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session=req.getSession();
 
-        UserDTO user= SessionUtils.loadUser(session);
-        LoginDTO loginDTO=new LoginDTO(user.getLogin(),user.getPassword());
+        UserDTO user = SessionUtils.loadUser(session);
 
-        StatDTO statisticsDTO=statisticsService.get(loginDTO);
+        StatDTO statisticsDTO=statisticsService.get();
         req.setAttribute("statistics",statisticsDTO);
 
         req.getRequestDispatcher("/template/statistics.jsp").forward(req,resp);

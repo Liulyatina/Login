@@ -4,6 +4,7 @@ import by.it_academy.jd2.core.dto.StatDTO;
 import by.it_academy.jd2.core.dto.UserDTO;
 import by.it_academy.jd2.dao.StatDao;
 import by.it_academy.jd2.dao.api.IStatDao;
+import by.it_academy.jd2.service.api.IMessageService;
 import by.it_academy.jd2.service.api.IStatService;
 import by.it_academy.jd2.service.api.IUserService;
 import by.it_academy.jd2.service.dto.LoginDTO;
@@ -13,29 +14,13 @@ import java.util.Optional;
 public class StatService implements IStatService {
 
     private final IStatDao statDao;
-    private final IUserService userService;
 
-    public StatService(IStatDao statDao, IUserService userService) {
-
+    public StatService(IStatDao statDao) {
         this.statDao = statDao;
-        this.userService = userService;
     }
 
     @Override
-    public StatDTO get(LoginDTO loginDTO) {
-
-        Optional<UserDTO> userByLogin = userService.getByLogin(loginDTO.getLogin());
-
-        if (userByLogin.isEmpty()) {
-            throw new IllegalArgumentException("Пользователя с таким логином не существует");
-        }
-
-        UserDTO user = userByLogin.get();
-
-        if (!user.getPassword().equals(loginDTO.getPassword())) {
-            throw new IllegalArgumentException("Пароль не верный");
-        }
-
+    public StatDTO get() {
         return statDao.get();
     }
 

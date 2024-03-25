@@ -1,6 +1,7 @@
 package by.it_academy.jd2.service;
 
 import by.it_academy.jd2.core.dto.UserRole;
+import by.it_academy.jd2.dao.UserDao;
 import by.it_academy.jd2.dao.api.IUserDao;
 import by.it_academy.jd2.service.api.IUserService;
 import by.it_academy.jd2.service.dto.RegistrationUserDTO;
@@ -58,4 +59,5 @@ public class UserService implements IUserService {
     public Optional<UserDTO> getByLogin(String login) {
         return this.userDao.getByLogin(login);
     }
+
 }

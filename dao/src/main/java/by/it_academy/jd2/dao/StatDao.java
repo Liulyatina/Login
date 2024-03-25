@@ -18,7 +18,7 @@ public class StatDao implements IStatDao {
     public StatDao(int messages, int users, int activeUsers) {
         this.message = messages;
         this.user = users;
-        this.activeUsers=activeUsers;
+        this.activeUsers = activeUsers;
     }
 
     public StatDao() {

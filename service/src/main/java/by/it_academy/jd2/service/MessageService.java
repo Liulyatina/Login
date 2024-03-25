@@ -13,17 +13,17 @@ import java.util.Optional;
 
 public class MessageService implements IMessageService {
 
-    private final IMessageDao dao;
+    private final IMessageDao messageDao;
     private final IUserService userService;
 
     public MessageService(IMessageDao dao, IUserService userService) {
-        this.dao = dao;
+        this.messageDao = dao;
         this.userService = userService;
     }
 
     @Override
     public List<MessageDTO> list(UserDTO forUser) {
-        return this.dao.list(forUser);
+        return this.messageDao.list(forUser);
     }
 
     @Override
@@ -47,7 +47,8 @@ public class MessageService implements IMessageService {
                 .dateTime(LocalDateTime.now())
                 .build();
 
-        this.dao.create(create);
+        this.messageDao.create(create);
 
     }
+
 }
