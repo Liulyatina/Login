@@ -12,8 +12,6 @@ import java.util.Optional;
 public class UserDao implements IUserDao {
     private final Map<String, UserDTO> users = new HashMap<>();
 
-    private final IStatDao statDao = DaoFactory.getStatDao();
-
     @Override
     public void create(UserDTO user) {
 
@@ -23,9 +21,6 @@ public class UserDao implements IUserDao {
             }
             return user;
         });
-
-        statDao.incrementUser();
-
     }
 
     @Override

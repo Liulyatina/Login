@@ -15,7 +15,6 @@ public class MessageDao implements IMessageDao {
 
     private final Map<String, List<MessageDTO>> fromUser = new HashMap<>();
     private final Map<String, List<MessageDTO>> forUser = new HashMap<>();
-    private final IStatDao statDao = DaoFactory.getStatDao();
 
     @Override
     public List<MessageDTO> list(UserDTO forUser) {
@@ -32,7 +31,5 @@ public class MessageDao implements IMessageDao {
         List<MessageDTO> forList = this.forUser.getOrDefault(dto.getTo(), new ArrayList<>());
         forList.add(dto);
         this.forUser.put(dto.getTo(), forList);
-
-        statDao.incrementMessage();
     }
 }
