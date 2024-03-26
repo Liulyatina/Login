@@ -21,13 +21,13 @@ public class AuthService implements IAuthService {
     public UserDTO login(LoginDTO login) {
         Optional<UserDTO> optional = this.userService.getByLogin(login.getLogin());
 
-        if(optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new IllegalArgumentException(WRONG_LOGIN_OR_PASSWORD);
         }
 
         UserDTO userDTO = optional.get();
 
-        if(!userDTO.getPassword().equals(login.getPassword())){
+        if (!userDTO.getPassword().equals(login.getPassword())) {
             throw new IllegalArgumentException(WRONG_LOGIN_OR_PASSWORD);
         }
 

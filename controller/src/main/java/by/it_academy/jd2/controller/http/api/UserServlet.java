@@ -1,6 +1,5 @@
 package by.it_academy.jd2.controller.http.api;
 
-import by.it_academy.jd2.core.dto.UserRole;
 import by.it_academy.jd2.service.api.IUserService;
 import by.it_academy.jd2.service.dto.RegistrationUserDTO;
 import by.it_academy.jd2.service.factory.ServiceFactory;

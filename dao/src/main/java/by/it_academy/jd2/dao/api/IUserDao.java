@@ -6,5 +6,6 @@ import java.util.Optional;
 
 public interface IUserDao {
     void create(UserDTO user);
+
     Optional<UserDTO> getByLogin(String login);
 }

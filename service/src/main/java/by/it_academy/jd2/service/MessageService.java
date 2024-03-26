@@ -34,11 +34,11 @@ public class MessageService implements IMessageService {
         Optional<UserDTO> userTo = userService.getByLogin(dto.getTo());
         Optional<UserDTO> userFrom = userService.getByLogin(from.getLogin());
 
-        if(userTo.isEmpty()){
+        if (userTo.isEmpty()) {
             throw new IllegalArgumentException("Нет пользователя которому вы отправляете не существует");
         }
 
-        if(userFrom.isEmpty()){
+        if (userFrom.isEmpty()) {
             throw new IllegalArgumentException("Нет пользователя от которого вы отправляете не существует");
         }
 
@@ -54,5 +54,5 @@ public class MessageService implements IMessageService {
         messageDao.create(message);
         statService.incrementMessage();
 
-        }
     }
+}

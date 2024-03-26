@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 
         String contextPath = req.getContextPath();
         String basePath = "";
-        if(!contextPath.isBlank()){
+        if (!contextPath.isBlank()) {
             basePath += contextPath;
         }
 

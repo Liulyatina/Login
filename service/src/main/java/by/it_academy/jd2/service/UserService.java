@@ -20,22 +20,23 @@ public class UserService implements IUserService {
         this.userDao = userDao;
         this.statService = statService;
     }
+
     @Override
     public void create(UserDTO userDTO) {
 
-        if(userDTO.getRole() == null){
+        if (userDTO.getRole() == null) {
             throw new IllegalArgumentException("Роль должна быть обязательно указана");
         }
-        if(userDTO.getLogin() == null || userDTO.getLogin().isBlank()){
+        if (userDTO.getLogin() == null || userDTO.getLogin().isBlank()) {
             throw new IllegalArgumentException("Логин должен быть обязательно указан");
         }
-        if(userDTO.getPassword() == null || userDTO.getPassword().isBlank()){
+        if (userDTO.getPassword() == null || userDTO.getPassword().isBlank()) {
             throw new IllegalArgumentException("Пароль должен быть обязательно указан");
         }
 
         Optional<UserDTO> byLogin = this.userDao.getByLogin(userDTO.getLogin());
 
-        if(byLogin.isPresent()){
+        if (byLogin.isPresent()) {
             throw new IllegalArgumentException("Пользователь с таким логином уже существует");
         }
 

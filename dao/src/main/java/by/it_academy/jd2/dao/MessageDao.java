@@ -3,8 +3,6 @@ package by.it_academy.jd2.dao;
 import by.it_academy.jd2.core.dto.MessageDTO;
 import by.it_academy.jd2.core.dto.UserDTO;
 import by.it_academy.jd2.dao.api.IMessageDao;
-import by.it_academy.jd2.dao.api.IStatDao;
-import by.it_academy.jd2.dao.factory.DaoFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;

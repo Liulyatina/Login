@@ -14,6 +14,7 @@ public class DaoFactory {
     private volatile static IMessageDao messageDao;
 
     private volatile static IStatDao statDao;
+
     public static IUserDao getUserDao() {
         if (userDao == null) {
             synchronized (DaoFactory.class) {
