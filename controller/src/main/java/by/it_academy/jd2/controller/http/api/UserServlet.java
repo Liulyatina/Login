@@ -40,18 +40,13 @@ public class UserServlet extends HttpServlet {
 
         try {
             birthday = LocalDate.parse(birthdayRaw, formatter);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Ошибка при чтении даты. Введите дату в формате дд.мм.уууу");
         }
 
         RegistrationUserDTO user = new RegistrationUserDTO(login, password, name, birthday);
 
-        try {
-            this.userService.create(user);
-            resp.setStatus(HttpServletResponse.SC_CREATED);
-        } catch (IllegalArgumentException e) {
-            writer.write("Ошибка валидации: " + e.getMessage());
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }
+        this.userService.create(user);
+        resp.setStatus(HttpServletResponse.SC_CREATED);
     }
 }

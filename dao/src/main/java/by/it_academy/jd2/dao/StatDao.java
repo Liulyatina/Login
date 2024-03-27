@@ -23,11 +23,11 @@ public class StatDao implements IStatDao {
 
     @Override
     public StatDTO get() {
-        return StatDTO.builder().
-                users(this.user.get()).
-                messages(this.message.get()).
-                activeUsers(this.activeUsers.get()).
-                build();
+        return StatDTO.builder()
+                .users(this.user.get())
+                .messages(this.message.get())
+                .activeUsers(this.activeUsers.get())
+                .build();
     }
 
     @Override

@@ -33,6 +33,9 @@ public class UserService implements IUserService {
         if (userDTO.getPassword() == null || userDTO.getPassword().isBlank()) {
             throw new IllegalArgumentException("Пароль должен быть обязательно указан");
         }
+        if (userDTO.getName() == null || userDTO.getName().isBlank()) {
+            throw new IllegalArgumentException("Имя должно быть обязательно указано");
+        }
 
         Optional<UserDTO> byLogin = this.userDao.getByLogin(userDTO.getLogin());
 

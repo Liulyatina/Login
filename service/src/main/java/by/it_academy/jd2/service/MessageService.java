@@ -51,7 +51,6 @@ public class MessageService implements IMessageService {
 
         this.messageDao.create(message);
 
-        messageDao.create(message);
         statService.incrementMessage();
 
     }
